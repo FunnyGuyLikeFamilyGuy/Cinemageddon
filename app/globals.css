@@ -40,3 +40,28 @@ a {
     color-scheme: dark;
   }
 }
+
+/* Dark, subtle scrollbar styles for all browsers */
+html, body, * {
+  scrollbar-width: thin;
+  scrollbar-color: #333 #121212;
+}
+
+/* Webkit browsers (Chrome, Edge, Safari) */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  background: #121212;
+}
+::-webkit-scrollbar-track {
+  background: #121212;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
