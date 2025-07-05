@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { useParams } from "next/navigation";
 import styles from "../../page.module.css";
 
 const OMDB_API_KEY = "thewdb"; // Demo key, replace with your own for production
@@ -15,14 +16,18 @@ interface Movie {
   Type: string;
 }
 
-export default function GenrePage({ params }: { params: { genre: string } }) {
+export default function GenrePage() {
+  const params = useParams();
+  const genre = params?.genre as string;
   const [movies, setMovies] = useState<Movie[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
   useEffect(() => {
-    fetchMoviesByGenre(params.genre);
-  }, [params.genre]);
+    if (genre) {
+      fetchMoviesByGenre(genre);
+    }
+  }, [genre]);
 
   const fetchMoviesByGenre = async (genre: string) => {
     setLoading(true);
@@ -88,7 +93,7 @@ export default function GenrePage({ params }: { params: { genre: string } }) {
     </Link>
   );
 
-  const genreName = params.genre.charAt(0).toUpperCase() + params.genre.slice(1).replace('-', ' ');
+  const genreName = genre ? genre.charAt(0).toUpperCase() + genre.slice(1).replace('-', ' ') : 'Unknown Genre';
 
   return (
     <div className={styles.page}>

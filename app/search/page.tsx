@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import MovieCard from "../components/MovieCard";
@@ -27,7 +27,7 @@ interface FavoriteMovie {
   rank: number;
 }
 
-export default function SearchPage() {
+function SearchContent() {
   const searchParams = useSearchParams();
   const query = searchParams.get("query") || "";
   const [movies, setMovies] = useState<Movie[]>([]);
@@ -121,5 +121,35 @@ export default function SearchPage() {
         </div>
       )}
     </div>
+  );
+}
+
+export default function SearchPage() {
+  return (
+    <Suspense fallback={
+      <div className={styles.page}>
+        <main className={styles.main}>
+          <div className={styles.header}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+              <Link href="/" className={styles.backButton}>
+                ← Back to Home
+              </Link>
+              <h1 className={styles.title}>Search Results</h1>
+            </div>
+            <Settings />
+          </div>
+          <div className={styles.loadingGrid}>
+            {[...Array(12)].map((_, i) => (
+              <div key={i} className={styles.loadingCard}></div>
+            ))}
+          </div>
+        </main>
+        <footer className={styles.footer}>
+          <p>Powered by TMDB API</p>
+        </footer>
+      </div>
+    }>
+      <SearchContent />
+    </Suspense>
   );
 } 
