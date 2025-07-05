@@ -190,8 +190,14 @@
     padding: clamp(4px, 2vw, 16px);
   }
   .main {
-    gap: 32px;
+    gap: 24px;
     padding: 0;
+  }
+  
+  .header {
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
   }
 }
 
@@ -593,17 +599,21 @@
 }
 
 @media (max-width: 768px) {
-.title {
-  font-size: 2.5rem;
+  .title {
+    font-size: 2.5rem;
+    margin-bottom: 12px;
   }
 
   .sectionTitle {
     font-size: 1.5rem;
     padding-left: 16px;
+    margin-bottom: 16px;
   }
 
   .sectionHeader {
     padding: 0 8px;
+    flex-wrap: wrap;
+    gap: 8px;
   }
 
   .showMoreWrapper {
@@ -611,9 +621,11 @@
   }
 
   .carouselArrow {
-    width: 32px;
-    height: 32px;
+    width: 44px;
+    height: 44px;
     font-size: 1.2rem;
+    min-width: 44px;
+    min-height: 44px;
   }
 
   .movieGrid {
@@ -636,11 +648,13 @@
   }
 
   .addToFavoritesButton {
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
     font-size: 1.4rem;
     top: 6px;
     right: 6px;
+    min-width: 36px;
+    min-height: 36px;
   }
 
   .movieCard:hover .addToFavoritesButton {
@@ -650,10 +664,12 @@
 
   .movieInfo h3 {
     font-size: 0.9rem;
+    line-height: 1.3;
   }
 
   .movieInfo p {
     font-size: 0.8rem;
+    line-height: 1.2;
   }
 
   .genreGrid {
@@ -675,16 +691,26 @@
     flex: 0 0 160px;
     height: 280px;
   }
+  
+  .backButton {
+    padding: 10px 16px;
+    font-size: 1rem;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
 }
 
 @media (max-width: 480px) {
   .title {
     font-size: 2rem;
+    margin-bottom: 8px;
   }
 
   .sectionTitle {
     font-size: 1.3rem;
     padding-left: 12px;
+    margin-bottom: 12px;
   }
 
   .sectionHeader {
@@ -699,9 +725,11 @@
   }
 
   .carouselArrow {
-    width: 28px;
-    height: 28px;
+    width: 40px;
+    height: 40px;
     font-size: 1rem;
+    min-width: 40px;
+    min-height: 40px;
   }
 
   .movieGrid {
@@ -724,16 +752,28 @@
   }
 
   .addToFavoritesButton {
-    width: 28px;
-    height: 28px;
+    width: 32px;
+    height: 32px;
     font-size: 1.2rem;
     top: 4px;
     right: 4px;
+    min-width: 32px;
+    min-height: 32px;
   }
 
   .movieCard:hover .addToFavoritesButton {
     opacity: 1;
     transform: scale(1);
+  }
+
+  .movieInfo h3 {
+    font-size: 0.85rem;
+    line-height: 1.2;
+  }
+
+  .movieInfo p {
+    font-size: 0.75rem;
+    line-height: 1.1;
   }
 
   .genreGrid {
@@ -754,6 +794,12 @@
   .loadingCard {
     flex: 0 0 140px;
     height: 240px;
+  }
+  
+  .backButton {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    min-height: 40px;
   }
 }
 
@@ -865,14 +911,25 @@
   }
   .searchInput {
     font-size: 1rem;
-    padding: 10px 40px 10px 12px;
+    padding: 12px 44px 12px 16px;
+    min-height: 48px;
+  }
+  .searchButton {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
   }
   .searchDropdown {
     font-size: 0.98rem;
   }
   .suggestionThumb {
-    width: 28px;
-    height: 42px;
+    width: 32px;
+    height: 48px;
+  }
+  .suggestion {
+    padding: 12px 16px;
+    min-height: 60px;
   }
 }
 
@@ -1014,27 +1071,30 @@
 }
 @media (max-width: 600px) {
   .detailFlexRow {
-    padding: 10px 2px;
-    gap: 12px;
+    padding: 16px 12px;
+    gap: 16px;
   }
   .detailPosterSmall {
-    width: 100px;
-    max-width: 110px;
+    width: 120px;
+    max-width: 140px;
+  }
+  .detailInfoCol {
+    gap: 12px;
   }
   .castList {
-    gap: 8px;
+    gap: 10px;
   }
   .castCard {
-    min-width: 70px;
-    max-width: 80px;
-    padding: 6px 2px 6px 2px;
+    min-width: 80px;
+    max-width: 90px;
+    padding: 8px 4px 6px 4px;
   }
   .castImg {
-    width: 38px;
-    height: 38px;
+    width: 44px;
+    height: 44px;
   }
   .castName, .castChar {
-    max-width: 54px;
+    max-width: 64px;
     font-size: 0.85rem;
   }
 }
@@ -1574,6 +1634,59 @@
   color: #333;
 }
 
+/* Mobile touch improvements */
+@media (max-width: 768px) {
+  /* Improve touch targets */
+  .movieCard {
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  .movieCard:active {
+    transform: scale(0.98);
+  }
+  
+  .castCard {
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  .castCard:active {
+    transform: scale(0.95);
+  }
+  
+  /* Better scroll behavior */
+  .movieGrid {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+  
+  .castList {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+  
+  /* Improve button touch targets */
+  .carouselArrow {
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  .addToFavoritesButton {
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  .backButton {
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  .showMoreBtn {
+    -webkit-tap-highlight-color: transparent;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+}
+
 /* Mobile responsive settings */
 @media (max-width: 768px) {
   .settingsDropdown {
@@ -1590,6 +1703,128 @@
   .themeToggle {
     width: 100%;
     justify-content: center;
+    min-height: 44px;
+  }
+}
+
+/* Extra small screen improvements */
+@media (max-width: 360px) {
+  .title {
+    font-size: 1.8rem;
+  }
+  
+  .sectionTitle {
+    font-size: 1.2rem;
+    padding-left: 8px;
+  }
+  
+  .movieCard {
+    flex: 0 0 130px;
+    min-height: 220px;
+    padding: 6px;
+  }
+  
+  .moviePoster {
+    max-height: 160px;
+  }
+  
+  .addToFavoritesButton {
+    width: 28px;
+    height: 28px;
+    font-size: 1.1rem;
+    min-width: 28px;
+    min-height: 28px;
+  }
+  
+  .carouselArrow {
+    width: 36px;
+    height: 36px;
+    font-size: 0.9rem;
+    min-width: 36px;
+    min-height: 36px;
+  }
+  
+  .backButton {
+    padding: 6px 10px;
+    font-size: 0.85rem;
+    min-height: 36px;
+  }
+  
+  .detailFlexRow {
+    padding: 12px 8px;
+    gap: 12px;
+  }
+  
+  .detailPosterSmall {
+    width: 100px;
+    max-width: 120px;
+  }
+  
+  .castCard {
+    min-width: 70px;
+    max-width: 80px;
+    padding: 6px 2px 4px 2px;
+  }
+  
+  .castImg {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+/* Landscape orientation improvements for mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+  .main {
+    gap: 20px;
+  }
+  
+  .title {
+    font-size: 2.2rem;
+    margin-bottom: 8px;
+  }
+  
+  .sectionTitle {
+    font-size: 1.4rem;
+    margin-bottom: 12px;
+  }
+  
+  .movieGrid {
+    gap: 10px;
+    padding: 4px 0 16px 0;
+  }
+  
+  .movieCard {
+    flex: 0 0 150px;
+    min-height: 260px;
+  }
+  
+  .moviePoster {
+    max-height: 200px;
+  }
+  
+  .detailFlexRow {
+    flex-direction: row;
+    padding: 20px 16px;
+    gap: 20px;
+  }
+  
+  .detailPosterSmall {
+    width: 120px;
+    max-width: 140px;
+  }
+  
+  .castList {
+    gap: 12px;
+  }
+  
+  .castCard {
+    min-width: 85px;
+    max-width: 95px;
+  }
+  
+  .castImg {
+    width: 48px;
+    height: 48px;
   }
 }
 
